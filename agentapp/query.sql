@@ -1,3 +1,3 @@
 select COUNT(*) from users
 
--- select name from products LIMIT 5
+select * from products LIMIT 5
