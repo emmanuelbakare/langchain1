@@ -6,18 +6,21 @@ from langchain.prompts import (
 )
 from langchain.agents import AgentExecutor, OpenAIFunctionsAgent 
 from langchain.schema import SystemMessage
-from tool import run_query_tool, list_tables, describe_table_tool
+from tool2 import run_query_tool,   get_table_and_fields
 from htmlGenerator import write_report_tool
 from dotenv import load_dotenv 
 
 load_dotenv()
-tables = ", ".join(table[0] for table in list_tables() if table[0] is not None)
+# tables = ", ".join(table[0] for table in list_tables() if table[0] is not None)
 
 ai_msg =f"""
 You are an AI that has access to a database with these tables \n
-The database has tables of {tables} \n
+The database has tables  and fields in using this format
+Format:
+<table>:field1,field2,... \n
+{get_table_and_fields()} \n
 Do not make any assumption of what database exist or what
-column exist. Instead, use the 'describe_tables' function
+column exist. use the provided table and fields as provided. 
 """
 print(ai_msg)
 llm = ChatOpenAI()
@@ -29,10 +32,8 @@ prompt = ChatPromptTemplate(
     ]
 )
 
-tools = [
-        run_query_tool, 
-        describe_table_tool,
-        write_report_tool]
+# tools = [run_query_tool, describe_table_tool, write_report_tool]
+tools = [run_query_tool, write_report_tool]
 
 agent = OpenAIFunctionsAgent(
     llm = llm,
@@ -45,9 +46,6 @@ agent_executor = AgentExecutor(
     tools = tools,
     verbose= True
 )
-
 while True:
     prompt_request = input(">> ")
     agent_executor(prompt_request)
-
-# agent_executor("how many users have provided a shipping address")
