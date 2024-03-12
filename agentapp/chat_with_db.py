@@ -6,6 +6,7 @@ from langchain.prompts import (
 )
 from langchain.agents import AgentExecutor, OpenAIFunctionsAgent 
 from langchain.schema import SystemMessage
+from langchain.memory import ConversationBufferMemory
 from tool import run_query_tool, list_tables, describe_table_tool
 from htmlGenerator import write_report_tool
 from dotenv import load_dotenv 
@@ -21,9 +22,14 @@ column exist. Instead, use the 'describe_tables' function
 """
 print(ai_msg)
 llm = ChatOpenAI()
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True
+)
 prompt = ChatPromptTemplate(
     messages= [
         SystemMessage(content=ai_msg),
+        MessagesPlaceholder(variable_name = "chat_history"),
         HumanMessagePromptTemplate.from_template("{input}"),
         MessagesPlaceholder(variable_name = "agent_scratchpad")
     ]
@@ -43,7 +49,8 @@ agent = OpenAIFunctionsAgent(
 agent_executor = AgentExecutor(
     agent = agent,
     tools = tools,
-    verbose= True
+    verbose= True,
+    memory= memory
 )
 
 while True:
