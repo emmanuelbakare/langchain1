@@ -10,6 +10,7 @@ from langchain.memory import ConversationBufferMemory
 
 from tool2 import run_query_tool,   get_table_and_fields
 from htmlGenerator import write_report_tool
+from handlers.chat_model_start_handler import ChatModelStartHandler
 from dotenv import load_dotenv 
 
 
@@ -18,15 +19,17 @@ load_dotenv()
 
 ai_msg =f"""
 You are an AI that has access to a database with these tables \n
-The database has tables  and fields in using this format
+The database has tables  and fields using this format
 Format:
 <table>:field1,field2,... \n
 {get_table_and_fields()} \n
 Do not make any assumption of what database exist or what
-column exist. use the provided table and fields as provided. 
+column exist. Use the provided table and fields. 
 """
-print(ai_msg)
-llm = ChatOpenAI()
+handler = ChatModelStartHandler()
+llm = ChatOpenAI(
+    callbacks = [handler]
+)
 memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True
