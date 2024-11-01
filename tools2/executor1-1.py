@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 # Initialize OpenAI API Key
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 system_message=SystemMessage(content="""
@@ -29,7 +30,11 @@ prompt_template = ChatPromptTemplate(
 )
 
 # Create an OpenAI language model instance
-llm = ChatOpenAI(model="gpt-3.5-turbo")
+# llm = ChatOpenAI(model="gpt-3.5-turbo")
+api_key= os.getenv("CLAUDE_API_KEY")
+llm = ChatAnthropic(anthropic_api_key=api_key,
+                    model_name = "claude-3-5-sonnet-20240620"
+                    )
 
 tools = [code_writer]
 # Create an agent with the prompt
