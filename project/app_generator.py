@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_openai_tools_agent, AgentExecutor
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from two_model_generator import generate_model
+from code_generator import generate_model
 # from three_djangotools import format_response
 from utilities import get_llm, format_response
 
