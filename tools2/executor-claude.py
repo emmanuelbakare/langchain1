@@ -31,9 +31,8 @@ class CodeGenerationAgent:
         """
         
         # Initialize Claude model
-        api_key= os.getenv("CLAUDE_API_KEY")
         self.llm = ChatAnthropic(
-                    anthropic_api_key=api_key,
+                    anthropic_api_key=os.getenv("CLAUDE_API_KEY"),
                     model_name = "claude-3-5-sonnet-20240620"
                     )
         
