@@ -1,10 +1,7 @@
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_openai_tools_agent, AgentExecutor
-from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
 from code_generator import generate_model
-# from three_djangotools import format_response
 from utilities import get_llm, format_response
 
 

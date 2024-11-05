@@ -3,7 +3,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder, HumanMessagePromptTemplate, SystemMessagePromptTemplate
 from langchain_anthropic import ChatAnthropic
 from langchain.memory import ConversationBufferMemory
-from tool1 import code_writer 
+from tools import code_writer 
 from utilities import get_llm
 
 def generate_model(clean_schema):
@@ -49,24 +49,44 @@ def generate_model(clean_schema):
         
     )
     print("Generating the schema models. Please wait...")
+    #MODEL
     result = executor.invoke({"prompt_message":f"generate the model based on the schema below\n {clean_schema} \n write the code to models.py file"})
 
     # return prompt_message
     outputs =[]
     outputs.append(return_output(result,llm_type))
 
+    #FORM
+    print("Generating the forms. Please wait...")
+    result = executor.invoke({"prompt_message":"generate the forms for this application and store it in forms.py"})
+    outputs.append(return_output(result,llm_type))
+
+    #VIEWS
     print("Generating the views. Please wait...")
     result = executor.invoke({"prompt_message":"based on the model generated create the view for each model and writ the ouptut in a views.py file"})
     outputs.append(return_output(result,llm_type))
 
-
+    #URLS
     print("Generating the urls. Please wait...")
     result = executor.invoke({"prompt_message":"generate the urls files and store it in urls.py"})
     outputs.append(return_output(result,llm_type))
 
-    print("Generating the forms. Please wait...")
-    result = executor.invoke({"prompt_message":"generate the forms for this application and store it in forms.py"})
+    #TEMPLATES
+    print("Generating the templates. Please wait...")
+    result = executor.invoke({"prompt_message":"""generate the templates for each forms for this application in .html files
+                            store the .html files in subfolder templates which is under the templates folder"""})
+    outputs.append(["generated all the templates needed for the application"])
+
+    #ADMIN
+    print("Generating the admin. Please wait...")
+    result = executor.invoke({"prompt_message":"generate the admin configuration file for access to the backend"})
     outputs.append(return_output(result,llm_type))
+
+    
+    # result = executor.invoke({"prompt_message":"""generate the templates for each forms for this application and 
+    #                           store it in folder templates under the generated folder.
+    #                           create the folder if it doen't exist"""})
+    # outputs.append(return_output(result,llm_type))
 
  
 
