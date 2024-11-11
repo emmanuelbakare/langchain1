@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body%}
+<h2>{{item.title}}</h2>
+<div>{{item.description}}</div>
+<strong>${{item.price}}</strong>
+
+<a href="{% url 'food:update_item' item.id %}" class="btn btn-warning"> Update</a>
+<a href="{% url 'food:delete_item' item.id %}" class="btn btn-warning"> Delete</a>
+{% endblock%}

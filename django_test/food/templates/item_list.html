@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Item List{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Item List</h1>
+<div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.item_name }}</h5>
+                <p class="card-text">{{ item.item_desc|truncatewords:20 }}</p>
+                <p class="card-text"><strong>Price:</strong> ${{ item.item_price }}</p>
+                <a href="{% url 'item:item_detail' item.pk %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p>No items available.</p>
+    </div>
+    {% endfor %}
+</div>
+<a href="{% url 'item:item_create' %}" class="btn btn-success mt-3">Add New Item</a>
+{% endblock %}

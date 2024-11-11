@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Department Detail{% endblock %}
+
+{% block content %}
+    <h1>Department Detail</h1>
+    <p>Name: {{ department.name }}</p>
+    <p>Manager: {{ department.manager.first_name }} {{ department.manager.last_name }}</p>
+    <a href="{% url 'app_name:department_update' department.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'app_name:department_delete' department.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'app_name:department_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

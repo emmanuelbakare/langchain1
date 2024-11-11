@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1> Food List </h1>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-4">
+            {% for item in items%}
+                <h3>{{item.title}}</h3>
+                <div>{{item.description}}</div>
+                <div>{{item.price}}</div>
+            {% endfor%}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div> -->
+
+<ol>
+    {% for item in items%}
+        <li> <a href="{% url 'food:item_detail' item.id %}"> {{item.title}}</a> 
+    {% endfor%}
+</ol>
+{% endblock %}

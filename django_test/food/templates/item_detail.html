@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.item_name }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ item.item_name }}</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ item.item_name }}</h5>
+        <p class="card-text">{{ item.item_desc }}</p>
+        <p class="card-text"><strong>Price:</strong> ${{ item.item_price }}</p>
+        <p class="card-text"><small class="text-muted">Created: {{ item.created_at|date:"F d, Y H:i" }}</small></p>
+        <p class="card-text"><small class="text-muted">Last updated: {{ item.updated_at|date:"F d, Y H:i" }}</small></p>
+    </div>
+</div>
+<div class="mt-3">
+    <a href="{% url 'item:item_update' item.pk %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'item:item_delete' item.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'item:item_list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

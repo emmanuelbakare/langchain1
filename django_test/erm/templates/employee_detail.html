@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Employee Details</h1>
+<p>First Name: {{ employee.first_name }}</p>
+<p>Last Name: {{ employee.last_name }}</p>
+<p>Email: {{ employee.email }}</p>
+<p>Phone Number: {{ employee.phone_number }}</p>
+<p>Hire Date: {{ employee.hire_date }}</p>
+<p>Position: {{ employee.position }}</p>
+<p>Department: {{ employee.department.name }}</p>
+<a href="{% url 'app_name:employee_update' employee.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'app_name:employee_delete' employee.pk %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'app_name:employee_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

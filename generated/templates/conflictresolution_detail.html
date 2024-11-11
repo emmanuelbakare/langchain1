@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Conflict Resolution Detail{% endblock %}
+
+{% block content %}
+    <h1>Conflict Resolution Detail</h1>
+    <p>Employee: {{ resolution.employee.first_name }} {{ resolution.employee.last_name }}</p>
+    <p>Resolution Date: {{ resolution.resolution_date }}</p>
+    <p>Description: {{ resolution.description }}</p>
+    <a href="{% url 'app_name:conflictresolution_update' resolution.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'app_name:conflictresolution_delete' resolution.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'app_name:conflictresolution_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

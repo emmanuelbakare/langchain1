@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('myapp.urs.py'))
+    path('myapp/', include('myapp.urls')),
+    path('tester/', include('tester.urls')),
 ]
