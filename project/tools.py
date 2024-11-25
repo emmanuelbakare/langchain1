@@ -6,7 +6,7 @@ import os
 def write_to_file(generated_code, filename):
     with open(filename, 'w') as file:
         file.write(generated_code)
-    print(f"created ")
+    print(f"{filename} created")
     
 class WriteCodeArgs(BaseModel):
     generated_code:str

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Delete Meeting{% endblock %}
+{% block content %}
+<h1>Delete Meeting</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete the meeting titled '{{ meeting.title }}'?</p>
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+</form>
+<a href="{% url 'your_app_name:meeting_list' %}" class="btn btn-secondary">Cancel</a>
+{% endblock %}

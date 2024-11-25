@@ -63,7 +63,9 @@ def generate_model(clean_schema):
 
     #FORM
     print("Generating the forms. Please wait..." )
-    result = executor.invoke({"prompt_message":"""generate the forms for this application and store it in forms.py. 
+    result = executor.invoke({"prompt_message":"""generate the forms for this application and store it in forms.py.
+                              - use the schema fields property to decide what type of  form  to create. For example it the field is a date type make a date form
+                              - add a form-control  bootstrap  class on all the form field
                               - ensure the fields in the models are captured in the form except the id"""})
     outputs.append(return_output(result,llm_type))
 
@@ -117,7 +119,25 @@ def generate_model(clean_schema):
 
     return outputs
 
-    
+def chat(llm_name="claude",text=""):
+    #instantiate the specified llm options: claude , openai
+    llm = get_llm(llm_name) 
+    #generate the prompt
+    prompt = ChatPromptTemplate(
+        input_variables = [input],
+        messages = [
+            HumanMessagePromptTemplate.from_template("{input}")
+        ]
+    ) 
+
+
+    chat = prompt | llm 
+    res = chat.invoke({"input":text})
+    # format the output 
+    result =res.content
+    return result
+
+
 
 
 #code for outputting result in openai or claude are different. this function helps to format the output similarly.

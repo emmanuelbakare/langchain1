@@ -3,10 +3,10 @@
 {% block title %}Feedback Detail{% endblock %}
 
 {% block content %}
-    <h1>Feedback Detail</h1>
-    <p>Employee: {{ feedback.employee.first_name }} {{ feedback.employee.last_name }}</p>
-    <p>Feedback Date: {{ feedback.feedback_date }}</p>
-    <p>Comments: {{ feedback.comments }}</p>
+    <h2>Feedback Detail</h2>
+    <p><strong>Employee:</strong> {{ feedback.employee.first_name }} {{ feedback.employee.last_name }}</p>
+    <p><strong>Date:</strong> {{ feedback.date }}</p>
+    <p><strong>Feedback:</strong> {{ feedback.feedback_text }}</p>
     <a href="{% url 'app_name:feedback_update' feedback.id %}" class="btn btn-warning">Edit</a>
     <a href="{% url 'app_name:feedback_delete' feedback.id %}" class="btn btn-danger">Delete</a>
     <a href="{% url 'app_name:feedback_list' %}" class="btn btn-secondary">Back to List</a>

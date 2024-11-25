@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Meeting Detail{% endblock %}
+
+{% block content %}
+    <h2>Meeting Detail</h2>
+    <p><strong>Title:</strong> {{ meeting.title }}</p>
+    <p><strong>Date:</strong> {{ meeting.date }}</p>
+    <p><strong>Location:</strong> {{ meeting.location }}</p>
+    <p><strong>Participants:</strong> {% for participant in meeting.participants.all %}{{ participant.first_name }} {{ participant.last_name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <a href="{% url 'app_name:meeting_update' meeting.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'app_name:meeting_delete' meeting.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'app_name:meeting_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
-
 {% block title %}Department List{% endblock %}
-
 {% block content %}
-    <h1>Departments</h1>
-    <a href="{% url 'app_name:department_create' %}" class="btn btn-primary">Add Department</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Manager</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for department in departments %}
-                <tr>
-                    <td>{{ department.name }}</td>
-                    <td>{{ department.manager.first_name }} {{ department.manager.last_name }}</td>
-                    <td>
-                        <a href="{% url 'app_name:department_detail' department.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'app_name:department_update' department.id %}" class="btn btn-warning">Edit</a>
-                        <a href="{% url 'app_name:department_delete' department.id %}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h1>Department List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department.name }}</td>
+            <td>{{ department.location }}</td>
+            <td>
+                <a href="{% url 'your_app_name:department_update' department.pk %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'your_app_name:department_delete' department.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'your_app_name:department_create' %}" class="btn btn-primary">Add Department</a>
 {% endblock %}

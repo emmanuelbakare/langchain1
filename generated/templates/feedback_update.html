@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
-
 {% block title %}Update Feedback{% endblock %}
-
 {% block content %}
-    <h1>Update Feedback</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-    <a href="{% url 'app_name:feedback_list' %}" class="btn btn-secondary">Cancel</a>
+<h1>Update Feedback</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
+<a href="{% url 'your_app_name:feedback_list' %}" class="btn btn-secondary">Back to List</a>
 {% endblock %}
